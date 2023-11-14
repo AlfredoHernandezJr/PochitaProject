@@ -1,16 +1,59 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
-public class CharacterController : MonoBehaviour
+public class movementScript : MonoBehaviour
 {
-    public float moveSpeed = 5f;
+    public float speed = 7.0f; // You can adjust the speed to your liking
+    public float jumpForce = 10f; // Initial force of the jump
+    public float maxJumpHeight = 15f; // Maximum jump height
+    private float initialY; // Initial y-position when the jump starts
+    private bool isJumping = false; // Whether the character is currently jumping
+    private Rigidbody2D rb;
+    private Vector3 initialScale; // Initial scale of the sprite
 
-    private void Update()
+    private void Start()
     {
-        float horizontalInput = Input.GetAxis("Horizontal");
-        float verticalInput = Input.GetAxis("Vertical");
+        rb = GetComponent<Rigidbody2D>();
+        initialScale = transform.localScale; // Store the initial scale
+    }
 
-        Vector3 movement = new Vector3(horizontalInput, verticalInput, 0) * moveSpeed * Time.deltaTime;
+    // Update is called once per frame
+    void Update()
+    {
+        float moveX = 0f;
 
-        transform.Translate(movement);
+        if (Input.GetKey("a"))
+        {
+            moveX = -speed;
+            transform.localScale = new Vector3(-initialScale.x, initialScale.y, initialScale.z); // Flip sprite to face left
+        }
+        if (Input.GetKey("d"))
+        {
+            moveX = speed;
+            transform.localScale = initialScale; // Flip sprite to face right
+        }
+
+        rb.velocity = new Vector2(moveX, rb.velocity.y);
+
+        if (Input.GetKeyDown("w") && !isJumping)
+        {
+            isJumping = true;
+            initialY = transform.position.y;
+            rb.velocity = new Vector2(rb.velocity.x, jumpForce);
+        }
+        else if (isJumping && transform.position.y - initialY >= maxJumpHeight)
+        {
+            rb.velocity = new Vector2(rb.velocity.x, 0);
+        }
+    }
+
+    // This method is called when the character touches the ground
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Ground"))
+        {
+            isJumping = false;
+        }
     }
 }
