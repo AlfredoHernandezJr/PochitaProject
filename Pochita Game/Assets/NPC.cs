@@ -26,7 +26,7 @@ public class NPC : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.E) && playerIsClose == true)
         {
-            Debug.Log("yes it works");
+            
             if (!Panel.activeInHierarchy)
             {
                 Panel.SetActive(true);

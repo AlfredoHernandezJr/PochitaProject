@@ -75,3 +75,6 @@ crashlytics-build.properties
 Pochita Game/Temp/FSTimeGet-62a6dca86a302f4438c5a8baa848bf60
 Pochita Game/Temp/UnityLockfile
 Pochita Game/Temp/workerlic
+**.log
+
+Pochita Game/Logs/shadercompiler-UnityShaderCompiler.exe6.log
