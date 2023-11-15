@@ -18,8 +18,6 @@ public class Proximity : MonoBehaviour
         dialogueText.text = "";
     }
 
-    
-
     // Handle collision with the player
     private void OnTriggerEnter2D(Collider2D other)
     {
