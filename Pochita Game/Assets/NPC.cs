@@ -1,95 +1,83 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 using TMPro;
+using System.Collections;
 
 public class NPC : MonoBehaviour
 {
-    public GameObject Panel;
-    public TextMeshProUGUI dialogueText;
-    public string[] dialogue;
-    private int index = 0;
+    public GameObject panel1;
+    public GameObject panel2;
 
+    public TextMeshProUGUI dialogueText1;
+    public TextMeshProUGUI dialogueText2;
+
+    public string[] dialogue1;
+    public string[] dialogue2;
+
+    private int index1 = 0;
+    private int index2 = 0;
     public float wordSpeed;
-    public bool playerIsClose;
 
+    private bool isPanel1Active = false;
+    private bool isPanel2Active = false;
 
     void Start()
     {
-
-        dialogueText.text = "";
+        dialogueText1.text = "";
+        dialogueText2.text = "";
     }
 
-    // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.E) && playerIsClose == true)
+        if (Input.GetKeyDown(KeyCode.E) && !isPanel1Active && !isPanel2Active)
         {
-            
-            if (!Panel.activeInHierarchy)
-            {
-                Panel.SetActive(true);
-                StartCoroutine(Typing());
-            }
-            else if (dialogueText.text == dialogue[index])
-            {
-                NextLine();
-            }
-
+            ShowPanel(panel1);
+            StartCoroutine(Typing1());
+            isPanel1Active = true;
         }
-        if (Input.GetKeyDown(KeyCode.Q) && Panel.activeInHierarchy)
+
+        if (Input.GetKeyDown(KeyCode.Space))
         {
-            RemoveText();
+            if (isPanel1Active)
+            {
+                HidePanel(panel1);
+                ShowPanel(panel2);
+                StartCoroutine(Typing2());
+                isPanel1Active = false;
+                isPanel2Active = true;
+            }
+            else if (isPanel2Active)
+            {
+                HidePanel(panel2);
+                isPanel2Active = false;
+            }
         }
     }
 
-    public void RemoveText()
+    void ShowPanel(GameObject panel)
     {
-        dialogueText.text = "";
-        index = 0;
-        Panel.SetActive(false);
+        panel.SetActive(true);
+        
     }
 
-    IEnumerator Typing()
+    void HidePanel(GameObject panel)
     {
-        foreach (char letter in dialogue[index].ToCharArray())
+        panel.SetActive(false);
+        
+    }
+    IEnumerator Typing1()
+    {
+        foreach (char letter in dialogue1[index1].ToCharArray())
         {
-            dialogueText.text += letter;
+            dialogueText1.text += letter;
             yield return new WaitForSeconds(wordSpeed);
         }
     }
-
-    public void NextLine()
+    IEnumerator Typing2()
     {
-        if (index < dialogue.Length - 1)
+        foreach (char letter in dialogue2[index2].ToCharArray())
         {
-            index++;
-            dialogueText.text = "";
-            StartCoroutine(Typing());
-        }
-        else
-        {
-            RemoveText();
-        }
-    }
-
-    private void OnTriggerEnter2D(Collider2D other)
-    {
-        if (other.CompareTag("Player"))
-        {
-            Debug.Log("it entered");
-            playerIsClose = true;
-        }
-    }
-
-    private void OnTriggerExit2D(Collider2D other)
-    {
-        if (other.CompareTag("Player"))
-        {
-            Debug.Log("it exited");
-            playerIsClose = false;
-            RemoveText();
+            dialogueText2.text += letter;
+            yield return new WaitForSeconds(wordSpeed);
         }
     }
 }

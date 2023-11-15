@@ -18,10 +18,7 @@ public class Proximity : MonoBehaviour
         dialogueText.text = "";
     }
 
-    void Update()
-    {
-        // You can remove the input checks since the dialogue is triggered by collision now
-    }
+    
 
     // Handle collision with the player
     private void OnTriggerEnter2D(Collider2D other)
