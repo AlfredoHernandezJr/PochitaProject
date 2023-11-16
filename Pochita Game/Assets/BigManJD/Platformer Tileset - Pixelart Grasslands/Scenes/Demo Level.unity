@@ -6833,7 +6833,7 @@ GameObject:
   - component: {fileID: 1069595407}
   m_Layer: 0
   m_Name: platform6
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -6847,7 +6847,7 @@ Transform:
   m_GameObject: {fileID: 1069595403}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 14.64, y: 21.81, z: 0}
+  m_LocalPosition: {x: 14.64, y: 20.05, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -7507,6 +7507,7 @@ MonoBehaviour:
   dialogue2:
   - I have to rescue my friend, and he is somewhere on this mountain.
   wordSpeed: 0.06
+  playerIsClose: 0
 --- !u!50 &1131163349
 Rigidbody2D:
   serializedVersion: 4
@@ -27866,7 +27867,7 @@ Tilemap:
       m_TileObjectToInstantiateIndex: 65535
       dummyAlignment: 0
       m_AllTileFlags: 1073741825
-  - first: {x: 18, y: 10, z: 0}
+  - first: {x: 17, y: 10, z: 0}
     second:
       serializedVersion: 2
       m_TileIndex: 96
@@ -27876,7 +27877,7 @@ Tilemap:
       m_TileObjectToInstantiateIndex: 65535
       dummyAlignment: 0
       m_AllTileFlags: 1073741825
-  - first: {x: 19, y: 10, z: 0}
+  - first: {x: 18, y: 10, z: 0}
     second:
       serializedVersion: 2
       m_TileIndex: 102
@@ -27886,7 +27887,7 @@ Tilemap:
       m_TileObjectToInstantiateIndex: 65535
       dummyAlignment: 0
       m_AllTileFlags: 1073741825
-  - first: {x: 20, y: 10, z: 0}
+  - first: {x: 19, y: 10, z: 0}
     second:
       serializedVersion: 2
       m_TileIndex: 95
@@ -28086,7 +28087,7 @@ Tilemap:
       m_TileObjectToInstantiateIndex: 65535
       dummyAlignment: 0
       m_AllTileFlags: 1073741825
-  - first: {x: 18, y: 11, z: 0}
+  - first: {x: 17, y: 11, z: 0}
     second:
       serializedVersion: 2
       m_TileIndex: 56
@@ -28096,7 +28097,7 @@ Tilemap:
       m_TileObjectToInstantiateIndex: 65535
       dummyAlignment: 0
       m_AllTileFlags: 1073741825
-  - first: {x: 19, y: 11, z: 0}
+  - first: {x: 18, y: 11, z: 0}
     second:
       serializedVersion: 2
       m_TileIndex: 97
@@ -28106,7 +28107,7 @@ Tilemap:
       m_TileObjectToInstantiateIndex: 65535
       dummyAlignment: 0
       m_AllTileFlags: 1073741825
-  - first: {x: 20, y: 11, z: 0}
+  - first: {x: 19, y: 11, z: 0}
     second:
       serializedVersion: 2
       m_TileIndex: 71
@@ -28496,7 +28497,7 @@ Tilemap:
       m_TileObjectToInstantiateIndex: 65535
       dummyAlignment: 0
       m_AllTileFlags: 1073741825
-  - first: {x: 24, y: 13, z: 0}
+  - first: {x: 23, y: 13, z: 0}
     second:
       serializedVersion: 2
       m_TileIndex: 96
@@ -28506,7 +28507,7 @@ Tilemap:
       m_TileObjectToInstantiateIndex: 65535
       dummyAlignment: 0
       m_AllTileFlags: 1073741825
-  - first: {x: 25, y: 13, z: 0}
+  - first: {x: 24, y: 13, z: 0}
     second:
       serializedVersion: 2
       m_TileIndex: 102
@@ -28516,7 +28517,7 @@ Tilemap:
       m_TileObjectToInstantiateIndex: 65535
       dummyAlignment: 0
       m_AllTileFlags: 1073741825
-  - first: {x: 26, y: 13, z: 0}
+  - first: {x: 25, y: 13, z: 0}
     second:
       serializedVersion: 2
       m_TileIndex: 95
@@ -28716,7 +28717,7 @@ Tilemap:
       m_TileObjectToInstantiateIndex: 65535
       dummyAlignment: 0
       m_AllTileFlags: 1073741825
-  - first: {x: 24, y: 14, z: 0}
+  - first: {x: 23, y: 14, z: 0}
     second:
       serializedVersion: 2
       m_TileIndex: 56
@@ -28726,7 +28727,7 @@ Tilemap:
       m_TileObjectToInstantiateIndex: 65535
       dummyAlignment: 0
       m_AllTileFlags: 1073741825
-  - first: {x: 25, y: 14, z: 0}
+  - first: {x: 24, y: 14, z: 0}
     second:
       serializedVersion: 2
       m_TileIndex: 97
@@ -28736,7 +28737,7 @@ Tilemap:
       m_TileObjectToInstantiateIndex: 65535
       dummyAlignment: 0
       m_AllTileFlags: 1073741825
-  - first: {x: 26, y: 14, z: 0}
+  - first: {x: 25, y: 14, z: 0}
     second:
       serializedVersion: 2
       m_TileIndex: 71
@@ -38277,7 +38278,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 19.539993, y: 11.031607}
+  m_Offset: {x: 18.520031, y: 11.004328}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -38288,7 +38289,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 3.2719555, y: 2.3648033}
+  m_Size: {x: 3.1012173, y: 2.0787659}
   m_EdgeRadius: 0
 --- !u!61 &1927235526
 BoxCollider2D:
@@ -38322,7 +38323,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 25.54031, y: 14.017431}
+  m_Offset: {x: 24.487991, y: 14.024399}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -38333,7 +38334,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 3.2217655, y: 2.2223969}
+  m_Size: {x: 3.1056366, y: 2.041233}
   m_EdgeRadius: 0
 --- !u!61 &1927235527
 BoxCollider2D:
@@ -38529,7 +38530,7 @@ GameObject:
   - component: {fileID: 1935069962}
   m_Layer: 0
   m_Name: platform4
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -38543,7 +38544,7 @@ Transform:
   m_GameObject: {fileID: 1935069958}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.61, y: 22.89, z: 0}
+  m_LocalPosition: {x: -0.61, y: 20.8, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -39116,7 +39117,7 @@ GameObject:
   - component: {fileID: 2039999609}
   m_Layer: 0
   m_Name: platform5
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -39130,7 +39131,7 @@ Transform:
   m_GameObject: {fileID: 2039999605}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 7.13, y: 19.64, z: 0}
+  m_LocalPosition: {x: 7.13, y: 18.3, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -40443,7 +40444,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 12.44672, y: 9.164412}
+  m_Offset: {x: 12.356138, y: 9.28916}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -40454,7 +40455,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 21.304146, y: 0.8848238}
+  m_Size: {x: 21.122982, y: 0.63532543}
   m_EdgeRadius: 0
 --- !u!483693784 &2128839288
 TilemapRenderer:

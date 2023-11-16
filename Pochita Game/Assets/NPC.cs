@@ -20,6 +20,8 @@ public class NPC : MonoBehaviour
     private bool isPanel1Active = false;
     private bool isPanel2Active = false;
 
+    public bool playerIsClose;
+
     void Start()
     {
         dialogueText1.text = "";
@@ -28,7 +30,7 @@ public class NPC : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.E) && !isPanel1Active && !isPanel2Active)
+        if (Input.GetKeyDown(KeyCode.E) && !isPanel1Active && !isPanel2Active && playerIsClose)
         {
             ShowPanel(panel1);
             StartCoroutine(Typing1());
@@ -78,6 +80,21 @@ public class NPC : MonoBehaviour
         {
             dialogueText2.text += letter;
             yield return new WaitForSeconds(wordSpeed);
+        }
+    }
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            playerIsClose = true;
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            playerIsClose = false;
         }
     }
 }
