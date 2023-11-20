@@ -12,10 +12,23 @@ public class Proximity : MonoBehaviour
 
     public float wordSpeed;
     private bool playerIsClose;
+    private Coroutine typingCoroutine; // Store reference to the typing coroutine.
+    private Transform playerTransform; // Reference to the player's transform.
 
     void Start()
     {
         dialogueText.text = "";
+        Panel.SetActive(false);
+        playerTransform = GameObject.FindGameObjectWithTag("Player").transform; // Find the player's transform.
+    }
+
+    void Update()
+    {
+        // Update NPC facing direction based on player's position
+        if (playerIsClose)
+        {
+            UpdateFacingDirection();
+        }
     }
 
     // Handle collision with the player
@@ -29,7 +42,8 @@ public class Proximity : MonoBehaviour
             if (!Panel.activeInHierarchy)
             {
                 Panel.SetActive(true);
-                StartCoroutine(Typing());
+                // Start the typing coroutine and store the reference.
+                typingCoroutine = StartCoroutine(Typing());
             }
         }
     }
@@ -46,6 +60,12 @@ public class Proximity : MonoBehaviour
 
     public void RemoveText()
     {
+        // Stop the typing coroutine if it's running.
+        if (typingCoroutine != null)
+        {
+            StopCoroutine(typingCoroutine);
+        }
+
         dialogueText.text = "";
         index = 0;
         Panel.SetActive(false);
@@ -60,17 +80,21 @@ public class Proximity : MonoBehaviour
         }
     }
 
-    public void NextLine()
+    private void UpdateFacingDirection()
     {
-        if (index < dialogue.Length - 1)
+        // Calculate the direction from NPC to player
+        Vector3 directionToPlayer = playerTransform.position - transform.position;
+
+        // Update the sprite or rotation based on the direction
+        if (directionToPlayer.x > 0)
         {
-            index++;
-            dialogueText.text = "";
-            StartCoroutine(Typing());
+            // Player is on the right side, make the NPC face right
+            transform.localScale = new Vector3(1, 1, 1); // Adjust the scale if using sprites
         }
-        else
+        else if (directionToPlayer.x < 0)
         {
-            RemoveText();
+            // Player is on the left side, make the NPC face left
+            transform.localScale = new Vector3(-1, 1, 1); // Adjust the scale if using sprites
         }
     }
 }
