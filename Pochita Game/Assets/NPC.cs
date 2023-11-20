@@ -23,6 +23,9 @@ public class NPC : MonoBehaviour
 
     public bool playerIsClose;
 
+    private Coroutine typing1;
+    private Coroutine typing2;
+
     void Start()
     {
         dialogueText1.text = "";
@@ -35,9 +38,9 @@ public class NPC : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.E) && !isPanel1Active && !isPanel2Active && playerIsClose)
         {
             ShowPanel(panel1);
-            StartCoroutine(Typing1());
+            typing1 = StartCoroutine(Typing1());
             isPanel1Active = true;
-            HidePressESprite(); // Hide the "Press E" sprite when panel1 is active
+            HidePressESprite(); 
         }
 
         if (Input.GetKeyDown(KeyCode.Space))
@@ -46,7 +49,7 @@ public class NPC : MonoBehaviour
             {
                 HidePanel(panel1);
                 ShowPanel(panel2);
-                StartCoroutine(Typing2());
+                typing2 = StartCoroutine(Typing2());
                 isPanel1Active = false;
                 isPanel2Active = true;
             }
@@ -54,7 +57,7 @@ public class NPC : MonoBehaviour
             {
                 HidePanel(panel2);
                 isPanel2Active = false;
-                ShowPressESprite(); // Show the "Press E" sprite when panel2 is finished
+                ShowPressESprite(); 
             }
         }
     }
@@ -79,13 +82,7 @@ public class NPC : MonoBehaviour
         pressESprite.SetActive(false);
     }
 
-    // Add your logic to check if the last panel is finished
-    bool LastPanelIsFinished()
-    {
-        // Implement your logic to check if the last panel is finished
-        // For example, return true if a certain condition is met.
-        return true; // Placeholder, replace with your actual logic
-    }
+   
 
     IEnumerator Typing1()
     {
@@ -118,6 +115,22 @@ public class NPC : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             playerIsClose = false;
+            HidePanel(panel1);
+            HidePanel(panel2);
+            if(typing1 != null)
+            {
+                StopCoroutine(typing1);
+                dialogueText1.text = "";
+            }
+            if(typing2 != null)
+            {
+                StopCoroutine(typing2);
+                dialogueText2.text = "";
+            }
+            isPanel1Active = false;
+            isPanel2Active = false;
+            ShowPressESprite();
         }
     }
+
 }

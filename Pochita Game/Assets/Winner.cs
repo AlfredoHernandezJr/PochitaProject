@@ -12,7 +12,14 @@ public class Winner : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             win.SetActive(true);
-            Time.timeScale = 0;
+            
+        }
+    }
+    private void OnTriggerExit2D(Collider2D other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            win.SetActive(false);
         }
     }
 }

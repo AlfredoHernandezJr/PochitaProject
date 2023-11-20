@@ -12,8 +12,8 @@ public class Proximity : MonoBehaviour
 
     public float wordSpeed;
     private bool playerIsClose;
-    private Coroutine typingCoroutine; // Store reference to the typing coroutine.
-    private Transform playerTransform; // Reference to the player's transform.
+    private Coroutine typingCoroutine;
+    private Transform playerTransform; 
 
     void Start()
     {
