@@ -8,7 +8,7 @@ public class Crumble : MonoBehaviour
         if (collision.gameObject.CompareTag("Player"))
         {
             // Invoke the method to disable the object after 2 seconds
-            Invoke("DisableCrumble", 2f);
+            Invoke("DisableCrumble", 1f);
         }
     }
 
@@ -18,7 +18,7 @@ public class Crumble : MonoBehaviour
         gameObject.SetActive(false);
 
         // Invoke the method to enable the object after another 2 seconds
-        Invoke("EnableCrumble", 2f);
+        Invoke("EnableCrumble", 1f);
     }
 
     private void EnableCrumble()
