@@ -7,6 +7,7 @@ TagManager:
   - bread
   - Platform
   - Ground
+  - Spikes
   layers:
   - Default
   - TransparentFX
