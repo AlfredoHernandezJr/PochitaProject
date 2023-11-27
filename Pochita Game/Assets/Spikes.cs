@@ -5,6 +5,9 @@ public class Spikes : MonoBehaviour
 {
     public Transform teleportDestination;
     public CharacterController characterController;
+    public FallingRocks fallingRocks;
+    public FallingRocks fallingRocks2;
+    public FallingRocks fallingRocks3;
 
     private void OnTriggerEnter2D(Collider2D other)
     {
@@ -47,6 +50,12 @@ public class Spikes : MonoBehaviour
         if (characterController != null)
         {
             characterController.enabled = true;
+        }
+        if (fallingRocks != null|| fallingRocks2 != null || fallingRocks3 != null)
+        {
+            fallingRocks.ResetPosition();
+            fallingRocks2.ResetPosition();
+            fallingRocks3.ResetPosition();
         }
     }
 }
