@@ -43,7 +43,7 @@ public class NPC : MonoBehaviour
             HidePressESprite(); 
         }
 
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.N))
         {
             if (isPanel1Active)
             {
