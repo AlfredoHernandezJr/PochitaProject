@@ -8,6 +8,8 @@ TagManager:
   - Platform
   - Ground
   - Spikes
+  - Bubble
+  - Pop
   layers:
   - Default
   - TransparentFX

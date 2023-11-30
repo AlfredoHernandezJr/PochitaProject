@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
-public class collectable : MonoBehaviour
+public class Collectable : MonoBehaviour
 {
     private int bread = 0;
-    public GameObject Bread;
+    public List<GameObject> breadObjects; // List to store multiple bread objects
     public TextMeshProUGUI BreadCounter;
 
     void Start()
@@ -26,11 +26,17 @@ public class collectable : MonoBehaviour
 
         if (collision.gameObject.CompareTag("bread"))
         {
-            Debug.Log("entered");
-            Destroy(Bread);
+            Destroy(collision.gameObject); // Destroy the collided bread object
             bread++;
-            
+
+            // Check if there are more bread objects
+            if (breadObjects.Count > 0)
+            {
+                // Activate the next bread object in the list
+                breadObjects[0].SetActive(true);
+                // Remove the activated bread object from the list
+                breadObjects.RemoveAt(0);
+            }
         }
     }
-
 }
