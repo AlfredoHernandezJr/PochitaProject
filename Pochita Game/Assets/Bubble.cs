@@ -11,6 +11,8 @@ public class Bubble : MonoBehaviour
     bool isMovingUp = false;
     float customDeltaTime = 0.004f;
 
+    private float originalGravityScale;
+
     void Start()
     {
         BubblePosition = transform.position;
@@ -21,7 +23,6 @@ public class Bubble : MonoBehaviour
         if (isMovingUp)
         {
             transform.Translate(Vector2.up * customDeltaTime * 20);
-            
 
             // Update the player's position to follow the bubble and be centered
             if (player != null)
@@ -39,13 +40,26 @@ public class Bubble : MonoBehaviour
 
             if (player != null)
             {
+                // Store the original gravity scale
+                Rigidbody2D playerRb = player.GetComponent<Rigidbody2D>();
+                if (playerRb != null)
+                {
+                    originalGravityScale = playerRb.gravityScale;
+                }
+
                 // Move the player to the bubble position and center it
                 player.transform.position = new Vector2(transform.position.x, BubblePosition.y);
+
+                // Disable gravity for the player's Rigidbody component
+                if (playerRb != null)
+                {
+                    playerRb.gravityScale = 0f;
+                }
 
                 isMovingUp = true;
             }
         }
-        else if (other.CompareTag("Ground"))
+        else if (other.CompareTag("Pop"))
         {
             if (other.gameObject == pop)
             {
@@ -53,6 +67,13 @@ public class Bubble : MonoBehaviour
                 isMovingUp = false;
                 transform.position = BubblePosition;
                 player.transform.position = FinalBubblePosition;
+
+                // Enable gravity for the player's Rigidbody component
+                Rigidbody2D playerRb = player.GetComponent<Rigidbody2D>();
+                if (playerRb != null)
+                {
+                    playerRb.gravityScale = originalGravityScale;
+                }
             }
         }
     }
