@@ -4,39 +4,51 @@ using UnityEngine;
 
 public class movementScript : MonoBehaviour
 {
-    public float speed = 7.0f; // You can adjust the speed to your liking
-    public float jumpForce = 10f; // Initial force of the jump
-    public float maxJumpHeight = 15f; // Maximum jump height
-    private float initialY; // Initial y-position when the jump starts
-    private bool isJumping = false; // Whether the character is currently jumping
+    public float speed = 7.0f;
+    public float jumpForce = 10f;
+    public float maxJumpHeight = 15f;
+    [SerializeField] private float dashingVelocity = 10f;
+    [SerializeField] private float dashingTime = 0.5f;
+    private Vector2 dashingDir;
+    private bool isDashing;
+    private bool canDash = true;
+
+    private float initialY;
+    private bool isJumping = false;
     private Rigidbody2D rb;
-    private Vector3 initialScale; // Initial scale of the sprite
+    private Vector3 initialScale;
 
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        initialScale = transform.localScale; // Store the initial scale
+        initialScale = transform.localScale;
     }
 
-    // Update is called once per frame
     void Update()
     {
         float moveX = 0f;
+        float moveY = 0f;
 
         if (Input.GetKey("a"))
         {
             moveX = -speed;
-            transform.localScale = new Vector3(-initialScale.x, initialScale.y, initialScale.z); // Flip sprite to face left
+            transform.localScale = new Vector3(-initialScale.x, initialScale.y, initialScale.z);
         }
         if (Input.GetKey("d"))
         {
             moveX = speed;
-            transform.localScale = initialScale; // Flip sprite to face right
+            transform.localScale = initialScale;
+        }
+        if (Input.GetKey("w"))
+        {
+            moveY = speed;
+        }
+        if (Input.GetKey("s"))
+        {
+            moveY = -speed;
         }
 
-        rb.velocity = new Vector2(moveX, rb.velocity.y);
-
-        if (Input.GetKeyDown("w") && !isJumping)
+        if (Input.GetKeyDown(KeyCode.Space) && !isJumping)
         {
             isJumping = true;
             initialY = transform.position.y;
@@ -46,14 +58,36 @@ public class movementScript : MonoBehaviour
         {
             rb.velocity = new Vector2(rb.velocity.x, 0);
         }
+
+        if (Input.GetKeyDown(KeyCode.LeftShift) && canDash)
+        {
+            isDashing = true;
+            canDash = false;
+            dashingDir = new Vector2(moveX, moveY);
+            StartCoroutine(StopDashing());
+        }
+
+        if (isDashing)
+        {
+            rb.velocity = dashingDir.normalized * dashingVelocity;
+            return;
+        }
+
+        rb.velocity = new Vector2(moveX, rb.velocity.y);
     }
 
-    // This method is called when the character touches the ground
+    private IEnumerator StopDashing()
+    {
+        yield return new WaitForSeconds(dashingTime);
+        isDashing = false;
+    }
+
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag("Ground"))
         {
             isJumping = false;
+            canDash = true;
         }
     }
 }
