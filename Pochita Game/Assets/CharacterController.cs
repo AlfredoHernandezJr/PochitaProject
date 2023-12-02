@@ -10,7 +10,7 @@ public class movementScript : MonoBehaviour
     [SerializeField] private float dashingVelocity = 10f;
     [SerializeField] private float dashingTime = 0.5f;
     private Vector2 dashingDir;
-    private bool isDashing;
+    public bool isDashing;
     private bool canDash = true;
 
     private float initialY;

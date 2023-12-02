@@ -11,6 +11,8 @@ public class Enemy : MonoBehaviour
     private bool moveRight = true;
     private Vector3 initialPosition;
     bool facingRight = true;
+    public movementScript dash;
+    public GameObject enemy;
 
     // Start is called before the first frame update
     void Start()
@@ -35,7 +37,16 @@ public class Enemy : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            other.transform.position = teleportDestination.position;
+
+            if(dash.isDashing == true)
+            {
+                Destroy(enemy);   
+            }
+            else if(dash.isDashing == false)
+            {
+                other.transform.position = teleportDestination.position;
+            }
+            
         }
     }
 

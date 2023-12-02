@@ -4,7 +4,7 @@ using System.Collections;
 public class Spikes : MonoBehaviour
 {
     public Transform teleportDestination;
-    public CharacterController characterController;
+   
     public FallingRocks fallingRocks;
     public FallingRocks fallingRocks2;
     public FallingRocks fallingRocks3;
@@ -19,13 +19,6 @@ public class Spikes : MonoBehaviour
             {
                 playerRenderer.enabled = false;
             }
-
-            // Disable the CharacterController script
-            if (characterController != null)
-            {
-                characterController.enabled = false;
-            }
-
             // Start a coroutine to teleport the player after a delay
             StartCoroutine(TeleportPlayerAfterDelay(other.transform, 1f));
         }
@@ -44,12 +37,6 @@ public class Spikes : MonoBehaviour
         if (playerRenderer != null)
         {
             playerRenderer.enabled = true;
-        }
-
-        // Enable the CharacterController script after teleportation
-        if (characterController != null)
-        {
-            characterController.enabled = true;
         }
         if (fallingRocks != null|| fallingRocks2 != null || fallingRocks3 != null)
         {
