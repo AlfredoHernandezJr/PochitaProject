@@ -6,6 +6,9 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/SampleScene.unity
-    guid: 2cda990e2423bbf4892e6590ba056729
+    path: Assets/Scenes/TitleScene.unity
+    guid: 0a5705fa9c7bf448992fe973e383424b
+  - enabled: 1
+    path: Assets/BigManJD/Platformer Tileset - Pixelart Grasslands/Scenes/Demo Level.unity
+    guid: f2dff846673e50442bf59ef0bace187c
   m_configObjects: {}
