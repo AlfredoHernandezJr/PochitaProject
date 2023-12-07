@@ -5,11 +5,11 @@ using UnityEngine.UI;
 
 public class movementScript : MonoBehaviour
 {
-    public float speed = 7.0f;
+    public float speed = 11.0f;
     public float jumpForce = 10f;
     public float maxJumpHeight = 15f;
-    [SerializeField] private float dashingVelocity = 10f;
-    [SerializeField] private float dashingTime = 0.5f;
+    [SerializeField] private float dashingVelocity = 18;
+    [SerializeField] private float dashingTime = 0.25f;
     [SerializeField] private float dashCooldown = 2f;
     private Vector2 dashingDir;
     public bool isDashing;
@@ -21,6 +21,9 @@ public class movementScript : MonoBehaviour
     private bool isJumping = false;
     private Rigidbody2D rb;
     private Vector3 initialScale;
+    private bool isJumpButtonPressed = false;
+    private float jumpTimeCounter;
+    public float jumpTime = 0.35f; // Maximum time the jump force is applied
 
     public Image dashImg;
 
@@ -54,15 +57,30 @@ public class movementScript : MonoBehaviour
             moveY = -speed;
         }
 
-        if (Input.GetKeyDown(KeyCode.Space) && !isJumping)
+if (Input.GetKeyDown(KeyCode.Space) && !isJumping)
         {
             isJumping = true;
-            initialY = transform.position.y;
+            isJumpButtonPressed = true;
+            jumpTimeCounter = jumpTime;
             rb.velocity = new Vector2(rb.velocity.x, jumpForce);
         }
-        else if (isJumping && transform.position.y - initialY >= maxJumpHeight)
+
+        if (Input.GetKey(KeyCode.Space) && isJumpButtonPressed)
         {
-            rb.velocity = new Vector2(rb.velocity.x, 0);
+            if (jumpTimeCounter > 0)
+            {
+                rb.velocity = new Vector2(rb.velocity.x, jumpForce);
+                jumpTimeCounter -= Time.deltaTime;
+            }
+            else
+            {
+                isJumpButtonPressed = false;
+            }
+        }
+
+        if (Input.GetKeyUp(KeyCode.Space))
+        {
+            isJumpButtonPressed = false;
         }
 
         if (Input.GetKeyDown(KeyCode.LeftShift) && canDash && Time.time - lastDashTime > dashCooldown && !hasDashedInAir)
