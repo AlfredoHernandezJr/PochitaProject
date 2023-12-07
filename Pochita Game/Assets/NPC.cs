@@ -26,6 +26,9 @@ public class NPC : MonoBehaviour
     private Coroutine typing1;
     private Coroutine typing2;
 
+    public AudioSource NPCtalk;
+    public AudioSource Bark;
+
     void Start()
     {
         dialogueText1.text = "";
@@ -37,6 +40,7 @@ public class NPC : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.E) && !isPanel1Active && !isPanel2Active && playerIsClose)
         {
+            NPCtalk.enabled = true;
             ShowPanel(panel1);
             typing1 = StartCoroutine(Typing1());
             isPanel1Active = true;
@@ -47,6 +51,8 @@ public class NPC : MonoBehaviour
         {
             if (isPanel1Active)
             {
+                NPCtalk.enabled = false;
+                Bark.enabled = true;
                 HidePanel(panel1);
                 ShowPanel(panel2);
                 typing2 = StartCoroutine(Typing2());
@@ -55,6 +61,7 @@ public class NPC : MonoBehaviour
             }
             else if (isPanel2Active)
             {
+                Bark.enabled = false;
                 HidePanel(panel2);
                 isPanel2Active = false;
                 ShowPressESprite(); 
@@ -114,6 +121,8 @@ public class NPC : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
+            NPCtalk.enabled = false;
+            Bark.enabled = false;
             playerIsClose = false;
             HidePanel(panel1);
             HidePanel(panel2);

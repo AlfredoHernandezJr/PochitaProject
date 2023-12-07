@@ -13,7 +13,9 @@ public class Proximity : MonoBehaviour
     public float wordSpeed;
     private bool playerIsClose;
     private Coroutine typingCoroutine;
-    private Transform playerTransform; 
+    private Transform playerTransform;
+
+    public AudioSource audiolistenerr;
 
     void Start()
     {
@@ -36,6 +38,7 @@ public class Proximity : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
+            audiolistenerr.enabled = true;
             Debug.Log("Player entered the Proximity trigger zone");
             playerIsClose = true;
 
@@ -52,6 +55,7 @@ public class Proximity : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
+            audiolistenerr.enabled = false;
             Debug.Log("Player exited the Proximity trigger zone");
             playerIsClose = false;
             RemoveText();
