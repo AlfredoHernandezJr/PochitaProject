@@ -25,16 +25,26 @@ public class movementScript : MonoBehaviour
     private float jumpTimeCounter;
     public float jumpTime = 0.35f; // Maximum time the jump force is applied
 
+
+    private Animator animator;
+    private Vector2 moving;
+
+
     public Image dashImg;
 
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         initialScale = transform.localScale;
+
+        animator = GetComponent<Animator>();
     }
 
     void Update()
     {
+
+        animator.SetFloat("speed", 0f);
+
         float moveX = 0f;
         float moveY = 0f;
 
@@ -42,11 +52,15 @@ public class movementScript : MonoBehaviour
         {
             moveX = -speed;
             transform.localScale = new Vector3(-initialScale.x, initialScale.y, initialScale.z);
+
+            animator.SetFloat("speed", 0.1f);
         }
         if (Input.GetKey("d"))
         {
             moveX = speed;
             transform.localScale = initialScale;
+
+            animator.SetFloat("speed", 0.1f);
         }
         if (Input.GetKey("w"))
         {
