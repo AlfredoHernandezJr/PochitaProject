@@ -4,10 +4,8 @@ using System.Collections;
 public class Spikes : MonoBehaviour
 {
     public Transform teleportDestination;
-   
-    public FallingRocks fallingRocks;
-    public FallingRocks fallingRocks2;
-    public FallingRocks fallingRocks3;
+
+    public FallingRocks[] fallingRocksArray;
 
     private void OnTriggerEnter2D(Collider2D other)
     {
@@ -38,11 +36,14 @@ public class Spikes : MonoBehaviour
         {
             playerRenderer.enabled = true;
         }
-        if (fallingRocks != null|| fallingRocks2 != null || fallingRocks3 != null)
+
+        // Reset positions of falling rocks in the array
+        foreach (FallingRocks fallingRocks in fallingRocksArray)
         {
-            fallingRocks.ResetPosition();
-            fallingRocks2.ResetPosition();
-            fallingRocks3.ResetPosition();
+            if (fallingRocks != null)
+            {
+                fallingRocks.ResetPosition();
+            }
         }
     }
 }

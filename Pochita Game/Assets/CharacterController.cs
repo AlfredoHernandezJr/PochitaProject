@@ -135,5 +135,6 @@ if (Input.GetKeyDown(KeyCode.Space) && !isJumping)
                 canDash = true;
             }
         }
+        
     }
 }
