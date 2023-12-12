@@ -5,6 +5,6 @@ public class LoadSceneButton : MonoBehaviour
 {
     public void LoadSecondScene()
     {
-        SceneManager.LoadScene(1); // Load the scene at index 1
+        SceneManager.LoadScene("Demo Level");
     }
 }
